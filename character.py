@@ -8,4 +8,4 @@ from sprite import Sprite
 @dataclass
 class Character(Sprite):
     """A class for competing entities."""
-    # TODO: refactor Player and Opponent to extnd Character
+    # TODO: refactor Player and Opponent to extend Character

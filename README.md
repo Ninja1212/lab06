@@ -1,4 +1,4 @@
-CPSC 110 Lab 5 Due: Fri Oct. 11, 2024, 9:00am
+CPSC 110 Lab 6 Due: Fri Oct. 18, 2024, 9:00am
 
 General Lab Instructions:
 1. All assignments will be submitted through Canvas. If you submit multiple times, the most recent submission will be graded.
@@ -17,81 +17,56 @@ General Lab Instructions:
 
 8. At the start of each assignment will be a list of the required files for submission. All files should be com- pressed in one zip folder named <studentnumber>_<yourname >_LAB < number >_CPSC110.zip. For example: 21870110_LUKESKYWALKER_LAB01_CPSC110.zip
 
-Lab 05 intructions:
-- Total points: 30
-- Due: Fri Oct. 11, 2024, 9:00am
-- Required files:
-  - food.py
-  - game.py
-  - run.py
-  - keys.py
-  - player.py
-  - tests.py
-  - .gitignore
-  - README.md
+Required files:
 
-# Lab 05: How to Design Worlds
+- character.py
+- food.py
+- game.py
+- install.py
+- keys.py
+- opponent.py
+- player.py
+- README.md
+- run.py
+- sprite.py
+- tests.py
 
-Download the full code at [https://github.com/CC-CPSC-110/lab05](https://github.com/CC-CPSC-110/lab05) by using your GitHub Desktop app.
+# Lab 06: How to Design Programs
+In this lab, we're looking at our interactive game program that we designed last class and **refactoring** it. This is a common way to design programs and is a big part of programming. 
 
-Today we are building our first interactive game. 
+See the [Refactoring Guru](https://refactoring.guru) for an in-depth discussion of how and when to refactor. 
 
-All tasks are marked with `TODO`. They are the minimum places where you will have to make changes. However, you can and should make more changes than the `TODO` marks if the problem requires it.
+Today we will be applying the lessons from our discussion of **type-of**, **part-of**, and **collection-of** relationships (or inheritance, composition, and aggregation respectively).
 
-Start by running `run.py` and observing the already-created behaviour of the system. It's best to trace through a file and see if you can figure out which functions call which other functions. Use the debugger or simply `ctrl-click` or `cmd-click` on function definitions to find where they go.
+Start by downloading the code at [https://github.com/CC-CPSC-110/lab06](https://github.com/CC-CPSC-110/lab06).
 
-You should see a ball that you can move around the screen by pressing the `WASD` keys. 
+# Problem 1: Refactor to make `Sprite`
+If you remember from last class, we had `Food` and `Player`. You'll notice that both have `x`, `y`, and `size` properties. Create a new class called `Sprite` that has those properties, then ensure that `Food` and `Player` extend `Sprite` by using a **type-of** relationship. 
 
-## Run tests and keep organized
+Write any appropriate tests in `tests.py`. Run your game to ensure that nothing has really changed.
 
-Take a look at `tests.py` and run it. You'll see that the tests have been organized into a long list and there are many of them. This is typical of a complex software system.
+# Problem 2: Create an `Opponent` Class
+We now want to create an `Opponent` that tries to eat the `Food` before the `Player` does. 
 
-You'll also notice that you **do not need to run** `run.py` to get the tests to work. Instead, we are **simulating** each function call. Since we know the input and output types precisely, we are able to test the functions on their own.
+We can go about this in two ways. One would be to simply copy everything from `Player`. The other would be to create a **type-of** relationship with another class, and let both `Player` and `Opponent` extend that class.
 
-Particularly when you start your group project, the need for tests will become quickly apparent. You want a guarantee that functions will work as intended, or development will quickly go in circles. We've been getting into the habit of test-driven development, but when large systems get to be complex, it is very, very important to have tests.
+For now, analyze what is similar about the needs of a computer-controlled `Opponent` and a human-controlled `Player`. Make notes in the `Opponent` class for yourself about what can stay the same, and what needs to change.
 
-The file system is carefully organized. Do your work where the TODOs indicate to keep organization simple.
+Write any tests you need in `tests.py`. Run your game.
 
-## Problem 1: Move a `Food`
+# Problem 3: Create a `Character` Class
+We now want to create an `Character` class that will make `Player` and `Opponent` have the same functionality.
 
-Find the `TODO` mark in `food.py` where it tells you to write the method for moving a `Food`. 
+Based off of your notes from `Opponent` (and any hints that I've left in the code), create the `Character` class which extends `Sprite` and has both `Player` and `Opponent` inherit from it. 
 
-Using the full HtDF recipe, completing the method with fully-defined tests. You can use the solution from lecture, or come up with your own system for moving.
+Remember that the goal is minimum duplicate code. Anything duplicated should be in the parent `Character` class. Anything different should be in the child classes.
 
-## Problem 2: Populate and draw `Food`
+Write any tests you need in `tests.py`. Run your game.
 
-Find the `TODO` mark in `food.py` where it tells you to write the method for populating a `FoodList`. Also note the `TODO` in `run.py` where it asks you to draw your `Food`.
+# Problem 4: Instantiate, move and draw your `Opponent`
+Make sure that the opponent exists and can move. I've given some example code for `Opponent` and `Sprite`. You may have to modify bits and pieces. 
 
-Using the full HtDF recipe, completing the method with fully-defined tests. You can use the solution from lecture, or come up with your own system for populating the FoodList.
+Use the full HtDF process to fill out and debug the rest of the move process. Write purpose statements, examples, and tests.
 
-## Problem 3: Move `Player` with mouse
-
-Find the `TODO` mark in `player.py` where it tells you to write the method for moving a `Player` to a mouse position. Also note the `TODO` in `run.py`.
-
-Using the full HtDF recipe, completing the method with fully-defined tests. You can use the solution from lecture, or come up with your own system for moving the `Player` to the mouse.
-
-Problem 4: Check whether `Player` is touching `Food`
-
-Find the `TODO` mark in `player.py` where it tells you to write the method for checking whether a `Player` is touching `Food`. Also note the `TODO` in `run.py`.
-
-Using the full HtDF recipe, completing the method with fully-defined tests. Hint: you can use a version of the `distance` method we've been implementing for `Apartment`, but you'll have to make a change based on `size` for both the `Player` and the `Food`.
-
-## Problem 5: Update `FoodList` and `count` in `Player`
-
-When the `Player` consumes a `Food`, its `count` needs to change and the `FoodList` needs to be updated to remove that `Food`. You'll need to figure out how to update both states.
-
-There are a few ways to complete this task. Top marks will be given to solutions that are clear, testable, and well-documented.
-
-Using the full HtDF recipe, completing the method with fully-defined tests.
-
-## Problem 6: Change `Player` size based on `Food` count
-
-Find the `TODO` mark in `player.py` where it tells you to write the method for changing `Player` size based on `Food` count. Also note the `TODO` in `run.py`.
-
-Using the full HtDF recipe, completing the method with fully-defined tests.
-
-## Problem 7: Playtest and Improve
-
-Congrats! You now have a very simple game. Play it a few times. Does it work the way you want or expect it to?
-
-Choose one thing you'd like to improve. Use the HtDF recipe for anything you improve. You cannot remove any functionalities, only add them.
+# Problem 5: Refactor `draw`
+Now that everything has inheritance, we should be able to make `draw` much shorter. Design a way to use **type-of**, **part-of**, and **collection-of** together so that you can make draw as short as possible.

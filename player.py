@@ -16,7 +16,7 @@ else:
 @dataclass
 class Player:
     """Describes the player."""
-    # TODO: refactor to extend Sprite
+    # TODO: refactor to extend Character
     x: float
     y: float
     size: float
