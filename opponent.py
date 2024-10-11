@@ -11,7 +11,7 @@ class Opponent(Sprite):
     # TODO: Write an opponent class that extends Sprite.
 
     def move(self, food_list: FoodList) -> Self:
-        closest: Food | None
+        closest: Food | None = None
         for f in food_list.food:
             if closest is None:
                 closest = f
