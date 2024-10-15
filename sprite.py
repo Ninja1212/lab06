@@ -13,9 +13,9 @@ class Sprite:
     
     # TODO: Refactor Character and Food to extend Sprite.
 
-    def direction(self, other: Self) -> Tuple[int, int]:
+    def direction(self, other: Self) -> Tuple[float, float]:
         # Step 1: Subtract the x and y coordinates of the two sprites to get the vector
-        vector: Tuple[int, int] = (other.x - self.x, other.y - self.y)
+        vector: Tuple[float, float] = (other.x - self.x, other.y - self.y)
         
         # Step 2: Compute the magnitude of the vector (ensure it's an int, so we can use floor later)
         magnitude: float = math.sqrt(vector[0]**2 + vector[1]**2)
@@ -26,8 +26,8 @@ class Sprite:
         
         # Step 4: Normalize and use floor to ensure the result is integer
         normalized_vector: Tuple[int, int] = (
-            math.floor(vector[0] / magnitude), 
-            math.floor(vector[1] / magnitude)
+            vector[0] / magnitude, 
+            vector[1] / magnitude
         )
         
         return normalized_vector
