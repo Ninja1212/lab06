@@ -25,7 +25,7 @@ class Sprite:
             return (0, 0)  # Return a zero vector if magnitude is zero
         
         # Step 4: Normalize and use floor to ensure the result is integer
-        normalized_vector: Tuple[int, int] = (
+        normalized_vector: Tuple[float, float] = (
             vector[0] / magnitude, 
             vector[1] / magnitude
         )
