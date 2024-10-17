@@ -9,3 +9,12 @@ from sprite import Sprite
 class Character(Sprite):
     """A class for competing entities."""
     # TODO: refactor Player and Opponent to extend Character
+    # NOTE: I would add the move method here, but it is different for the player & the opponent.
+    
+    x: int
+    y: int
+    size: int
+    speed: float
+    color: str
+    count: int = 0
+        

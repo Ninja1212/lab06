@@ -4,7 +4,9 @@ from cs110 import expect, summarize
 import game
 import player
 import keys
-import food 
+import food
+import opponent
+import sprite
 
 #------------------------------------------------------------------------------#
 # Setup: Run these before all tests.
@@ -34,16 +36,28 @@ test_player_DN = player.Player(x=100, y=200, size=10, speed=10, color="red")
 test_player_LT = player.Player(x=200, y=100, size=10, speed=10, color="red")
 test_player_RT = player.Player(x=  0, y=100, size=10, speed=10, color="red")
 
-
+"""
+Opponent Tests(not working):
+test_opponent_1 = opponent.Opponent(x=100, y=100, size=10, speed=10, color="blue")
+test_opponent_2 = opponent.Opponent(x=100, y=200, size=10, speed=10, color="blue")
+test_opponent_3 = opponent.Opponent(x=200, y=100, size=10, speed=10, color="blue")
+test_opponent_4 = opponent.Opponent(x=100, y=100, size=10, speed=10, color="blue")
+"""
 #------------------------------------------------------------------------------#
-# Test player.move
+# Test player.move (& opponent.move)
 #------------------------------------------------------------------------------#
 expect(test_player_1.move(10, ["UP"]),    test_player_UP)
 expect(test_player_2.move(10, ["DOWN"]),  test_player_DN)
 expect(test_player_3.move(10, ["RIGHT"]), test_player_LT)
 expect(test_player_4.move(10, ["LEFT"]),  test_player_RT)
 
-
+"""
+Opponent Tests(not working/need help):
+expect(test_opponent_1.move(10, ["UP"]),    test_opponent_UP)
+expect(test_opponent_2.move(10, ["DOWN"]),  test_opponent_DN)
+expect(test_opponent_3.move(10, ["RIGHT"]), test_opponent_LT)
+expect(test_opponent_4.move(10, ["LEFT"]),  test_opponent_RT)
+"""
 #------------------------------------------------------------------------------#
 # Test player.directions
 #------------------------------------------------------------------------------#
@@ -155,19 +169,19 @@ expect(test_food_hit.hit(test_player_hit_2), False)
 #------------------------------------------------------------------------------#
 # Test FoodList.populate
 #------------------------------------------------------------------------------#
-test_food_list = food.FoodList([])
+test_sprite_list = sprite.SpriteList([])
 
 # Populate with 5 food items within bounds (500, 500)
-populated_food_list = test_food_list.populate(5, (500, 500))
+populated_sprite_list = test_sprite_list.populate(5, (500, 500))
 
 # Expect 5 items in the list
-expect(len(populated_food_list), 5)
+expect(len(populated_sprite_list), 5)
 
 # Check that all food items are within bounds
-for food_item in populated_food_list:
-    expect(0 <= food_item.x <= 500, True)
-    expect(0 <= food_item.y <= 500, True)
-    expect(food_item.size, 10)
+for sprite_item in populated_sprite_list:
+    expect(0 <= sprite_item.x <= 500, True)
+    expect(0 <= sprite_item.y <= 500, True)
+    expect(sprite_item.size, 10)
 
 
 #------------------------------------------------------------------------------#

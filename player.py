@@ -1,7 +1,7 @@
 """Manages Player state."""
 import sys
 from typing import List, Tuple
-from sprite import Sprite
+from character import Character
 from dataclasses import dataclass
 # Get the Python version as a tuple
 python_version = sys.version_info
@@ -14,16 +14,11 @@ else:
     from typing_extensions import Self
 
 @dataclass
-class Player:
+class Player(Character):
     """Describes the player."""
+    
     # TODO: refactor to extend Character
-    x: float
-    y: float
-    size: float
-    speed: float
-    color: str
-    count: int = 0
-
+    
     def move(self, deltaT: float, dirs: List[str]) -> Self:
         """
         Purpose: Moves a player by speed per change in time in given directions.

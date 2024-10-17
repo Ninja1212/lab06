@@ -10,11 +10,9 @@ from character import Character
 @dataclass
 class Food(Sprite):
     """Food for the Player to eat."""
+    
     # TODO: refactor to extend Sprite
-    x: float
-    y: float
-    size: float
-
+    
     def move(self, dx: int, dy: int) -> Self:
         """
         Purpose: Moves the food by a given amount (dx, dy) in the x and y directions.
@@ -63,8 +61,8 @@ class Food(Sprite):
 class FoodList:
     """A containing class for Food."""
     food: List[Food]
-
-
+    
+    
     def populate(self, amount: int, bounds: Tuple[int, int]) -> List[Food]:
         """
         Purpose: Populates the game world with a specified amount of food, placing them 
@@ -84,7 +82,7 @@ class FoodList:
                 )
             )
         return self.food
-
+    
     
     def eat(self, chr: Character) -> List[Food]:
         """
@@ -102,7 +100,7 @@ class FoodList:
                 chr.resize()
                 self.food.remove(f)
         return self.food
-
+    
 
     def move(self) -> Self:
         """

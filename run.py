@@ -3,11 +3,16 @@ import pygame
 
 from game import Game
 from player import Player
+from opponent import Opponent
 from food import FoodList
 from keys import pressed_keys, directions
+from sprite import Sprite
+from sprite import SpriteList
+from typing import List, Tuple
+import random
 
 # TODO: Refactor draw to act on list of Sprite and draw all Sprites
-def draw(game: Game, player: Player, food_list: FoodList):
+def draw(game: Game, sprite_list: SpriteList):
     """
     Draws the player and game on the screen.
     
@@ -15,14 +20,8 @@ def draw(game: Game, player: Player, food_list: FoodList):
     simulation to test. We can do that, but for this class, it's a bit much.
     Therefore, we don't have any tests for this.
     """
-    game.screen.fill(game.background)
-    pygame.draw.circle(
-        game.screen,
-        player.color,
-        pygame.Vector2(player.x, player.y),
-        player.size
-    )
-    for f in food_list.food:
+
+    for f in sprite_list.sprite:
         pygame.draw.circle(
             game.screen,
             "blue",
@@ -71,6 +70,9 @@ def main():
     # Initialze pygame
     pygame.init()
 
+    sprite_list = SpriteList([])
+    sprite_list.populate(50, (game.screen.get_width(), game.screen.get_height()))
+    
     food_list = FoodList([])
     food_list.populate(100, (game.screen.get_width(), game.screen.get_height()))
     
@@ -104,7 +106,7 @@ def main():
         food_list.move()
 
         # Draw the game
-        draw(game, player, food_list)
+        draw(game, sprite_list)
 
 
 # Run the main function
